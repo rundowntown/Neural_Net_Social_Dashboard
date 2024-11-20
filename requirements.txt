@@ -1,0 +1,10 @@
+pandas
+numpy
+streamlit
+plotly
+scikit-learn
+nltk
+wordcloud
+networkx
+matplotlib
+Pillow
