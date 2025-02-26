@@ -710,7 +710,7 @@ def plot_cooccurrence_network(cooccurrence_df, threshold=10):
         return None
 
     ## Get positions
-    pos = nx.spring_layout(G, k=0.5, iterations=50)
+    pos = nx.spring_layout(G, k=0.5, iterations=100)
 
     ## Extract edge attributes
     edge_x = []
@@ -756,20 +756,27 @@ def plot_cooccurrence_network(cooccurrence_df, threshold=10):
     )
 
     ## Create figure
-    fig = go.Figure(data=[edge_trace, node_trace],
-                    layout=go.Layout(
-                        title='Topic Co-occurrence Network',
-                        titlefont_size=16,
-                        showlegend=False,
-                        hovermode='closest',
-                        margin=dict(b=20,l=5,r=5,t=40),
-                        annotations=[ dict(
-                            text="",
-                            showarrow=False,
-                            xref="paper", yref="paper") ],
-                        xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
-                        yaxis=dict(showgrid=False, zeroline=False, showticklabels=False))
-                   )
+    fig = go.Figure(
+        data=[edge_trace, node_trace],
+        layout=go.Layout(
+            title=dict(
+                text='Topic Co-occurrence Network',
+                font=dict(size=16)
+            ),
+            showlegend=False,
+            hovermode='closest',
+            margin=dict(b=20, l=5, r=5, t=40),
+            annotations=[dict(
+                text="",
+                showarrow=False,
+                xref="paper", 
+                yref="paper"
+            )],
+            xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
+            yaxis=dict(showgrid=False, zeroline=False, showticklabels=False)
+        )
+    )
+
 
     return fig
 
@@ -854,7 +861,7 @@ def plot_sentiment_choropleth(sentiment_per_state, topic):
         scope="usa",
         color_continuous_scale='RdBu',
         labels={'sentiment': f"Average Sentiment for '{topic.capitalize()}'"},
-        title=f"Sentiment Choropleth Map for '{topic.capitalize()}' Topic Across States"
+        title=f"Sentiment Choropleth Map of '{topic.capitalize()}' Across States"
     )
     
     ## Data check
@@ -1119,10 +1126,28 @@ def main():
 
     ## Display Distributions
     st.subheader("National Topic Distribution")
-    st.write(national_dist)
-
+    fig_national_dist = px.bar(
+        national_dist.reset_index(),
+        x='index',
+        y=0,
+        title="National Topic Distribution",
+        labels={'index': 'Topic', 0: 'Proportion'},
+        width=1000,  # Adjust the width here
+        height=400   # Adjust the height if needed
+    )
+    st.plotly_chart(fig_national_dist, use_container_width=True)
+    
     st.subheader(f"{selected_state} Topic Distribution")
-    st.write(state_dist)
+    fig_state_dist = px.bar(
+        state_dist.reset_index(),
+        x='index',
+        y=0,
+        title=f"{selected_state} Topic Distribution",
+        labels={'index': 'Topic', 0: 'Proportion'},
+        width=1000,  # Adjust the width here
+        height=400   # Adjust the height if needed
+    )
+    st.plotly_chart(fig_state_dist, use_container_width=True)
 
 
 
@@ -1288,7 +1313,7 @@ def main():
                 scope="usa",
                 color_continuous_scale="Viridis",
                 labels={selected_topic_map: f"{selected_topic_map.capitalize()} Proportion"},
-                title=f"Choropleth Map of '{selected_topic_map.capitalize()}' Topic Across States"
+                title=f"Choropleth Map of '{selected_topic_map.capitalize()}' Intensity Across States"
             )
             
             ## Check if any data is mapped
