@@ -1326,14 +1326,14 @@ def main():
             if fig_sentiment_choropleth:
                 st.plotly_chart(fig_sentiment_choropleth, use_container_width=True)
 
-    ## Topic Co-occurrence Network
-        st.markdown("#### Topic Co-occurrence Network")
-        with st.spinner("Calculating topic co-occurrence matrix..."):
-            cooccurrence_df = calculate_cooccurrence_matrix(df, mlb)
-        cooccurrence_threshold = st.slider("Minimum Co-occurrence Threshold for Network Edges", min_value=1, max_value=50, value=10)
-        fig_cooccurrence = plot_cooccurrence_network(cooccurrence_df, threshold=cooccurrence_threshold)
-        if fig_cooccurrence:
-            st.plotly_chart(fig_cooccurrence, use_container_width=True)
+    # ## Topic Co-occurrence Network
+    #     st.markdown("#### Topic Co-occurrence Network")
+    #     with st.spinner("Calculating topic co-occurrence matrix..."):
+    #         cooccurrence_df = calculate_cooccurrence_matrix(df, mlb)
+    #     cooccurrence_threshold = st.slider("Minimum Co-occurrence Threshold for Network Edges", min_value=1, max_value=50, value=10)
+    #     fig_cooccurrence = plot_cooccurrence_network(cooccurrence_df, threshold=cooccurrence_threshold)
+    #     if fig_cooccurrence:
+    #         st.plotly_chart(fig_cooccurrence, use_container_width=True)
 
 
     ## Cluster Analysis of States Based on Topic Distribution
