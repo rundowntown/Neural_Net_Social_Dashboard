@@ -756,27 +756,20 @@ def plot_cooccurrence_network(cooccurrence_df, threshold=10):
     )
 
     ## Create figure
-    fig = go.Figure(
-        data=[edge_trace, node_trace],
-        layout=go.Layout(
-            title=dict(
-                text='Topic Co-occurrence Network',
-                font=dict(size=16)
-            ),
-            showlegend=False,
-            hovermode='closest',
-            margin=dict(b=20, l=5, r=5, t=40),
-            annotations=[dict(
-                text="",
-                showarrow=False,
-                xref="paper", 
-                yref="paper"
-            )],
-            xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
-            yaxis=dict(showgrid=False, zeroline=False, showticklabels=False)
-        )
-    )
-
+    fig = go.Figure(data=[edge_trace, node_trace],
+                    layout=go.Layout(
+                        title='Topic Co-occurrence Network',
+                        titlefont_size=16,
+                        showlegend=False,
+                        hovermode='closest',
+                        margin=dict(b=20,l=5,r=5,t=40),
+                        annotations=[ dict(
+                            text="",
+                            showarrow=False,
+                            xref="paper", yref="paper") ],
+                        xaxis=dict(showgrid=False, zeroline=False, showticklabels=False),
+                        yaxis=dict(showgrid=False, zeroline=False, showticklabels=False))
+                   )
 
     return fig
 
