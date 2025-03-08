@@ -985,7 +985,7 @@ def get_state_abbrev():
 
 def main():
     st.set_page_config(page_title="State-wise Topic and Sentiment Analysis", layout="wide")
-    st.title("State-wise Topic and Sentiment Analysis Dashboard Test1")
+    st.title("State-wise Topic and Sentiment Analysis Dashboard Test2")
 
     ## Sidebar Configuration
     st.sidebar.header("Configuration")
@@ -1119,26 +1119,26 @@ def main():
 
     ## Display Distributions
     st.subheader("National Topic Distribution")
-    national_dist_df = national_dist.reset_index().rename(columns={'index': 'Topic', 0: 'Proportion'})
+    national_dist_df = national_dist.reset_index().rename(columns={'index': 'assigned_label', 0: 'count'})
     fig_national_dist = px.bar(
         national_dist_df,
-        x='Topic',
-        y='Proportion',
+        x='assigned_label',
+        y='count',
         title="National Topic Distribution",
-        labels={'Topic': 'Topic', 'Proportion': 'Proportion'},
+        labels={'assigned_label': 'Topic', 'count': 'Proportion'},
         width=1000,  
         height=400   
     )
     st.plotly_chart(fig_national_dist, use_container_width=True)
     
     st.subheader(f"{selected_state} Topic Distribution")
-    state_dist_df = state_dist.reset_index().rename(columns={'index': 'Topic', 0: 'Proportion'})
+    state_dist_df = state_dist.reset_index().rename(columns={'index': 'assigned_label', 0: 'count'})
     fig_state_dist = px.bar(
         state_dist_df,
-        x='Topic',
-        y='Proportion',
+        x='assigned_label',
+        y='count',
         title=f"{selected_state} Topic Distribution",
-        labels={'Topic': 'Topic', 'Proportion': 'Proportion'},
+        labels={'assigned_label': 'Topic', 'count': 'Proportion'},
         width=1000,  
         height=400   
     )
