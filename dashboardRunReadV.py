@@ -47,7 +47,7 @@ def load_data(csv_path):
     if not os.path.exists(csv_path):
         st.error(f"The file {csv_path} does not exist.")
         return None
-    df = pd.read_csv(csv_path)
+    df = pd.read_csv(csv_path, low_memory = False)
     return df
 
 
@@ -1119,26 +1119,28 @@ def main():
 
     ## Display Distributions
     st.subheader("National Topic Distribution")
+    national_dist_df = national_dist.reset_index().rename(columns={'index': 'Topic', 0: 'Proportion'})
     fig_national_dist = px.bar(
-        national_dist.reset_index(),
-        x='index',
-        y=0,
+        national_dist_df,
+        x='Topic',
+        y='Proportion',
         title="National Topic Distribution",
-        labels={'index': 'Topic', 0: 'Proportion'},
-        width=1000,  # Adjust the width here
-        height=400   # Adjust the height if needed
+        labels={'Topic': 'Topic', 'Proportion': 'Proportion'},
+        width=1000,  
+        height=400   
     )
     st.plotly_chart(fig_national_dist, use_container_width=True)
     
     st.subheader(f"{selected_state} Topic Distribution")
+    state_dist_df = state_dist.reset_index().rename(columns={'index': 'Topic', 0: 'Proportion'})
     fig_state_dist = px.bar(
-        state_dist.reset_index(),
-        x='index',
-        y=0,
+        state_dist_df,
+        x='Topic',
+        y='Proportion',
         title=f"{selected_state} Topic Distribution",
-        labels={'index': 'Topic', 0: 'Proportion'},
-        width=1000,  # Adjust the width here
-        height=400   # Adjust the height if needed
+        labels={'Topic': 'Topic', 'Proportion': 'Proportion'},
+        width=1000,  
+        height=400   
     )
     st.plotly_chart(fig_state_dist, use_container_width=True)
 
