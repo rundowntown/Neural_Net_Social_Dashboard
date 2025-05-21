@@ -989,7 +989,7 @@ def main():
     st.set_page_config(page_title="State-wise Topic and Sentiment Analysis", layout="wide",
                        page_icon = LOGO_PATH)
     
-    st.title("State-wise Topic and Sentiment Analysis Dashboard Test2")
+    st.title("State-wise Topic and Sentiment Analysis Dashboard v.3")
 
 
     # ---------- sidebar branding ----------
