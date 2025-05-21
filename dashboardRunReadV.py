@@ -32,6 +32,7 @@ nltk.download('vader_lexicon')
 ###################
 ## Core Functions
 ###################
+LOGO_PATH = "assets/P_logo_white.png"
 
 
 
@@ -984,8 +985,20 @@ def get_state_abbrev():
 ##############################################################
 
 def main():
-    st.set_page_config(page_title="State-wise Topic and Sentiment Analysis", layout="wide")
-    st.title("State-wise Topic and Sentiment Analysis Dashboard Test2")
+    
+
+    
+    
+    st.set_page_config(page_title="State-wise Topic and Sentiment Analysis", 
+                       layout="wide",
+                       page_icon = LOGO_PATH)
+    
+    st.title("State-wise Topic and Sentiment Analysis Dashboard v.3")
+    
+    # ---------- sidebar branding ----------
+    st.sidebar.image(LOGO_PATH, use_column_width=True)
+    st.sidebar.markdown("---")  # thin divider under the logo
+    # --------------------------------------
 
     ## Sidebar Configuration
     st.sidebar.header("Configuration")
